@@ -1,0 +1,192 @@
+CREATE DATABASE  IF NOT EXISTS `eventmanagement` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `eventmanagement`;
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+--
+-- Host: localhost    Database: eventmanagement
+-- ------------------------------------------------------
+-- Server version	8.0.39
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `events` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) NOT NULL,
+  `event_date` date NOT NULL,
+  `event_time` time(6) NOT NULL,
+  `image` varchar(1000) DEFAULT NULL,
+  `likes` int DEFAULT NULL,
+  `location` varchar(255) NOT NULL,
+  `max_ticket_capacity` int NOT NULL,
+  `optional` varchar(255) DEFAULT NULL,
+  `organized_by` varchar(255) NOT NULL,
+  `ticket_price` double NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `vendor_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKbq9ivlt0ykbk1sujvv186iram` (`vendor_id`),
+  CONSTRAINT `FKbq9ivlt0ykbk1sujvv186iram` FOREIGN KEY (`vendor_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `events`
+--
+
+LOCK TABLES `events` WRITE;
+/*!40000 ALTER TABLE `events` DISABLE KEYS */;
+INSERT INTO `events` VALUES (1,'An annual conference focusing on the latest trends in technology and innovation.','2024-12-15','09:30:00.000000','https://www.a-star.edu.sg/images/librariesprovider27/banners/simtech-innovation-technology-conference-2024_backdrop_09072414f850ed-f31e-4d6b-8646-6b0eb84578d2.jpg?sfvrsn=402d2a2a_1',0,'Convention Center, Downtown',447,'Virtual attendance available','TechWorld Inc.',150,'Tech Conference 2024',1),(2,'An annual conference focusing on the latest trends in technology and innovation.','2024-12-15','09:30:00.000000','https://example.com/images/tech-conference-2024.jpg',0,'Convention Center, Downtown',500,'Virtual attendance available','TechWorld Inc.',150,'Tech Conference 2024',1),(3,'An annual conference focusing on the latest trends in technology and innovation.','2024-12-15','09:30:00.000000',NULL,0,'Convention Center, Downtown',500,'Virtual attendance available','TechWorld Inc.',150,'Tech Conference 2024',1),(4,'An annual conference focusing on the latest trends in technology and innovation.','2024-12-15','09:30:00.000000',NULL,0,'Convention Center, Downtown',500,'Virtual attendance available','TechWorld Inc.',150,'Tech Conference 2024',1),(5,'An annual conference focusing on the latest trends in technology and innovation.','2024-12-15','09:30:00.000000',NULL,0,'Convention Center, Downtown',500,'Virtual attendance available','TechWorld Inc.',150,'Tech Conference 2024',1),(16,'dfdvf','2024-12-20','14:00:00.000000','',0,'matara',0,'cdfv','dvffdv',1000,'Abb',1),(17,'sdssdsdsd','2025-03-22','14:00:00.000000','',0,'Colombo',0,'sdsdsd','sdssd',500,'Abb',1);
+/*!40000 ALTER TABLE `events` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `refresh_tokens`
+--
+
+DROP TABLE IF EXISTS `refresh_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `refresh_tokens` (
+  `id` bigint NOT NULL,
+  `refresh_token` varchar(10000) NOT NULL,
+  `revoked` bit(1) DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK1lih5y2npsf8u5o3vhdb9y0os` (`user_id`),
+  CONSTRAINT `FK1lih5y2npsf8u5o3vhdb9y0os` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `refresh_tokens`
+--
+
+LOCK TABLES `refresh_tokens` WRITE;
+/*!40000 ALTER TABLE `refresh_tokens` DISABLE KEYS */;
+INSERT INTO `refresh_tokens` VALUES (1,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXJAbWFuYWdlci5jb20iLCJleHAiOjE3MzM0MTM3MjMsImlhdCI6MTczMjExNzcyMywic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.obMiZEwRiURqJY5CpFG29VOSLNX4HxhHiLBZ_VrSQ4mHzNLeoif39NU5mVny7s3FxHp4AcU61DKrVhseh8EEQO2j-AJ7QuuCxoJ4S9-zOOcaQSGZcqC_UnbATaAEmV_RT_ufZRwKC2fgUlx8DLiyBcjIjuIxRd8FOLUoZjBpAetip4yUGe0jHmIDz9L3taIA5ixA0UUU5netuRPSDrjJbINDIycyFwKJstS_JCxPD_Dwa4pLuqtO9ljMIPjM6xuFIm5I7O91yUF8KVWzRTieTBblvrDKV1ZQruGpN1fxKPUA54H1Oi08XoOlO7qu7fIOyk4bdxR4RVLF-0N4x8yV6g',_binary '\0',1),(2,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM0MTYxMDEsImlhdCI6MTczMjEyMDEwMSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.GeN_ob3tqM2UJ1nDjKXg1mxP9PJifcM4E1vS90JreeqqZYzYTYoXD9HOnPKUA-55RFwKkpNbjZARRWeWcTM2pn_6rR4HH9u4Je97skOvmwyiMpn67S8lQMQReCCQ0P8F8a4Y8ZmFrP-673Om54ceZ1ARUYHWI-fz4y0ROwyfDH_vhQRXirbEhIXWTYhMRvpoeryOiAPxU1hz66DNmrH6ln-Co_Ewnd9SqA6MM5IN8q-gmKUVBm4-V1VCmCyq__i3L0RSWm1bOU8tMeEEwDDM1fDVyz6f5K4L9Kq1E-oyiyv6kkeNNdQ9jkFxHRHwStqmIz1fbgpaMluOagL9EsqYbA',_binary '\0',1),(52,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3Mjc0MjQsImlhdCI6MTczMjQzMTQyNCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.aPhYZb5nYCmLgKCGhR63LiOVaAElJtapy350N64Q34H34NzL9nd7xU3DTbNUJrPXcosfl5f2WDp0DV7QRqFVSofA5QnxWqHbUKCEsARdG8grmjCqzqoXdFcx4rDzkzD0w0E-ckP1AxZrLXwbwjEDXrj6vfObrf9HkW-fxNBJW6zeY9UY9PBiFpCFKkwgEaQwqkLpWHR9BPnfpH5xu-HsyY8k9i383aolGaT4KGA-J8cbwrn63TPScWfsJAzBF4t7k9VnwwdrCWeKwqkR3vbrRJapviSvp4X0IdJd2xn65O31Eqy6SILj71_z7SBXbXR9_JEkVknHL0HXMvBfTJ31oA',_binary '\0',1),(102,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3Mjg3NjMsImlhdCI6MTczMjQzMjc2Mywic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.ka9QvnXF47e2WvAvXzRzZrjvPsN5XOZGpUpCg-tRK5ERadLucoJkcBhc5SmkPpmXxHvVGgDMcDd-xeDB6QTxWwwUJkW5LI5iCzKvqIztE1FzUd0r4XYG6nAjZOdTgmKxExCvr9lnjtGtoW0NejqvLZ6Mf_dZvvG3nJkmTsaYLUQA0EFNXPtpdcG5fQvQ3SNZiKZks1jAoydY-nNVWEw3rBKE2zxsI53n9sg4CAe_c1TE-D3MF71eFyE9kU4eOaLu0BVPNgzRXAMhFC2Z0Jk74BehPNugqC08O_pEOYpMmj0CDsYRVzFRW4TVO4vo_QPWcJsl4vIeALgI8keZYzt1dw',_binary '\0',1),(152,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3MzAyODEsImlhdCI6MTczMjQzNDI4MSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.MNwC7pxlwDidjWEb19FTj7EEoCV8T6LGuT-KVPjyStOXKfDpFfy2c6qhc_5XUYPpqAa4Rs0D9M4FrBe0L_aGHTY9W2VFJSY7cPgg45jK8JJTvSkB3N3mHH1pi-ndHQ4-iFccKFo_9ro4c2NIgY4_hYqNaRKx2TR_LE8SfOsfwi00iJOGN826KYFMzyDW1l-wZ2IjkdCynFvsIRg8fU-lT13qj2rbeLa6C64Y4YRXBZlvls3fahAd5rsg9qhnXxg-iDx1UuwKThQTxIjXSxyxMzucpKlLMo5pOVF7pMj0e2JOpOifGOWedklwDTWyJ3CyqN2CpjVvpaOju3v8e8Wkrg',_binary '\0',1),(153,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3MzE1MzYsImlhdCI6MTczMjQzNTUzNiwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.n31CFOTSFl9cxE2wQYtZm3LT148KWaEF_L6F1j-SdTN_uQbIJtz_obH9lPrLzJ2NOM9X0gLytVguFjQDpR_966uFvRA7SedHxFtGU4BFxtHoobly-O5GV0JITlIPrZUKC7LD9tqAWnaJfqBCbWVlc0T_Belu1PfVoUO9MXXTQE5L_09-N1s9EvEmXpFHj-MkCvcl44-GyRfzdq6Ey7QtUZOcY0MxRqnJz_VhxD7qj1ioxnOtlqGlO_MJOqPraXPfhLy8iGONxXW0JdhjkQPHDRpUi0Ywzt0TJdCjQKX4vUYklczj9-4oySlqj4AkYki0cVNK4JvYeHQ56HqaOc3aEw',_binary '\0',1),(154,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3MzE1NzgsImlhdCI6MTczMjQzNTU3OCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.ReMKsC6MGBaMDD7usLeeRnxHy2BX-pDs413BIZb1USF-21Vck52IwAqgdYI84236dOtbv9ysoS7iVyD2hUOoQnK9X1vnk04vRYsRXFb8oFMAeUibLyzV3ql2m2xNWlTZpHRsogonfzeYQsRYZuBrI-w3ywguU_ZLOhYRJ6uGuhs-6d_SUH4p-jHRHbTK3XszUCk5qq6eLOHhVJru-3VkQYr8nq9d4jQlGkHqdzqawkMkt7laWyV6qQTYcAmDTil2A7aZrNuzqMYsgGLyPmMEhWwuWeA810Hft4QpkphLjVuEWq1aoGzyduhXnF0w5RVNG28mEtJ3p-c8wzsIESPd2A',_binary '\0',1),(202,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3MzM1NTAsImlhdCI6MTczMjQzNzU1MCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.G2FtdDXs2LYzM-8CaFeSb5kcmThT-h7Uui8leHaYJvyb9vjdR-aRyLGFaJFu9_WCTY6oaoJYoJm9O-CYify1192qQ8Mlt7jLeXnn3PlzqoLewEP5SKsztODZCUD6WTdZChYFqCrIF5Hu7KknAAbBV5iT8wCONRYLAtjuRDZiVrVr7OxGbiPHiuviw262R0NDf1ywpfl7yW6OXuKxzwTsQtzWzA-gBLv-nA_f_riUx7M_TZ6n32oA2m1cnpzpVdxr7L0Z6Ljh9LahCcFPGkuWMytmNHxuvBdS7Qecp_-mDp2wy_9ShAu0INYL3J3UZco5IS7hcKiNk9BG54ShKUmH8Q',_binary '\0',1),(252,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3MzQxMDAsImlhdCI6MTczMjQzODEwMCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.sqNMKZi18K7wuYszOnyL_buTcIXEnbuSFuOa_kuKM7J9sp5lDe8PyZVg0GJXH1sISyIEbNE2cjVrGn7cZyA8fLMAJ57arrO6qhmkz_yD2twPLl1WTx8n3CR4LaM7_VOqt6yisLYYnfvHLLdA6IEBqlXepTsGwMJJR_bb9YF2FDGBAFMbu3gI_m3bQI9Kj28NirWP-uoRNkbqeg1tqaWmksttMWrKv2r-OCjHf8BBrXjdM_vpLVO-rHkYKqbrDuipRoUJgsAHfRvd7D6P546ogMtpnnbwo139qAIH5zACTKU2vdexBdqMxcNElG_PFsOX-JkRagP3YgcOSsHRL48KBA',_binary '\0',1),(302,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3MzYzNzYsImlhdCI6MTczMjQ0MDM3Niwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.mKKF8G5oXfmj43RfKpkT-8-6rtDyZTq_ie9Sd8ieuf_ZPo_oyjtv_RUqtHFDCe9RJukVeLx6T21EaLemF1pFIUbQCKdHrey3DellbgDnK8nMn4YLVArWOl9fbnesM-rMfTiizwALnnfCDjqjamuCSSxlYzxbTQlh2lbEYiMz0YYkQPyW2nZYHbnVhNm-qw2UuJf5cf4XcPoswD-ZXqxuPqVyvFpn-j-o82wviL4pSVulBK4BAZwGqSm-69YGWVjSol28owlMZ8wODgzRKlbeeQVBu9WTUIYxc_lrTyDU9rsZXpeK0daYU2CGRYZkUigZDArvghNchtfqrKao2qFTyQ',_binary '\0',1),(303,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3NDAwMjUsImlhdCI6MTczMjQ0NDAyNSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.sWrhyodFNNvMwnJELYJxuHp0whbEh4BxKk0DapwI5G6Vu7TB4DCHsDW_AiIu1fPtRQEc_lXcoTRNT7WCaBN7jfFxFvie0PHdRbpBlPwpK1GhKptBUm56zrZ4GJq0l5gpuLwW9n2I8AFb-fgLtrAfmyMvpMK2gGObb_SaS-2R04vt4nZH8eKGC5Z2d4a_11bKeMie54Xgweygu4AsooyOfY_A2qwwB-0LtFBCkHw1VFb5EpkRgZKTY2hjStSS635qNsq7r1GKcpactaXojJrbzeUZ3RmyzNITEdmOpyTSTpgZ14PntTp5Zz4rT0cOgideYT67_j-bVMkAJLvRr7Q5Jw',_binary '\0',1),(304,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3NDA1OTEsImlhdCI6MTczMjQ0NDU5MSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.nRUNBnxG2mBEmQ6RThbF8EgFcTvzoaQhbiswm6SycnQLmx6t2NUGpUZiyKyZcM_7xcP76y8CXcvo3bPyTWhcDBIOWAkpBM91RnqLPVtn7fs1DptW7_gTe8GCEseD1iBguWgwvxuhWHf0ffiR8Ysed-N1MRKPjq07WEoqpyzX3TQJax_drHeGPM5P0S7xpHxeaooeJtuyzU83fuKvoxWMrtWUcztshAMcJwOPqPLLHXcFoficFGsSldoHJcUK_3bXhIrttakU-8svPcFytBO7h4WtkJvdrTeR094CFlhfDn0mkNP8mWdqltRjVAK1qZhmBCpkUUEF6k8xo_hcYjAwZg',_binary '\0',1),(305,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3NDE1OTcsImlhdCI6MTczMjQ0NTU5Nywic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.lnOAmbuwT1CilE2k2zUuWXD16QO8q4ZZVUTbqPLjI9dIyI64TF9JAge8L-EOE6ekJDFs4s2MqUb1ZBY3W6-lvKKcPILqOwQZuNIeerIFmRLPCmcon8bD544VgZpDzurJ6zvBBWsdvzCsywxm6acA-EE8q7kQIpM0-4ndUcMx3EtMs1oozH715fTFMK2m7zreM18kPfajLztzubUNXSUvhiVB0MUFZghO5vPMkHDAwSX_rylQEUqcTKhQlELAtklFDs3JmJV0WQl8xmRQLVPJ-TyAdtzLQxdU7MN9aWa_s8y4t463dvheqYhQ-vcZM0gZ36Wvo0moZ-b1Gdpgn8yHag',_binary '\0',1),(352,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3NDMxNjksImlhdCI6MTczMjQ0NzE2OSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.tyzN9J-jTdT0974E7KWdki-HK5AOyUuiaTeiiZPy0ttFoy0gBP9RkqpNSfx2K3Tpbucr5Qrl67BV7a0XK_3VOk4IsXZcnF5sbyVJ2eHdsTMItCneRpqpsyM6yskVvos1AQ2IBjH6_QiN5K5AfXiiCyvfYWKZxwp9WvOhbneHflX0kamp6Br6zSg0adqwibusZ7kFC5w9vd-4jvA2oyiJD0y_6p7LLDUuo2ExUfCUBvLCkfio2GT9S0zCC3zcwQASwmw0nMeWu_PQL2C7u_etabkxFezY3pav2VK-MEciFdmn6vEVEwCwFCV2UJdrc9n_SsVNkElbjunCkO0myppk9A',_binary '\0',1),(353,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzM3NDM4MDksImlhdCI6MTczMjQ0NzgwOSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.Mt-NFVwK3dvz3yWmBZii3-53nu_aB-nUM-ovMoMw3QDT55EvCOezakPBADUAGYCDimTGbP89ehgklgfaWzimpForDUXhxys_L8jz2p3Ev_R6xh_H8w7MJVwp5t2oF-br59XJTp9zVArEXg4poHqjibiy_rYaI-mmZ67iDqDgxlWoMYT2SOnDtLo9fYl7Kl8aIZqINQcMZh-jI8Jq7QBa8YX6-LpUXKPiYThfqQ7kYxcUbsDX0ZZ_cIg9kZ4k3DOg7zqLACFrHAHoI9evM3mzJxEQn8DUI7p8RPi5VTDKn0nh9PJikSOFaWAjEZyKKEILeudAVLSOX8XnraxQfOYK4w',_binary '\0',1),(402,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNDEwMjUsImlhdCI6MTczMjQ0OTAyNSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.Rdxez-fk8gRIFPRHZxJL65GY_JjesTfylxPW5pSMPFoeqeqx46PSu8bAExrkA505OZwN7n3z5L1z7DuNHpxlJcZNhPkT8v-Xm8fTHQTQIvNXKvqmzp6aLfcO8n2OPt2JiH6FkavewFKMs48RbxF2jSperx85FezzlZY3aXSCA8-8FNx2JSzdOA_yPWfuTiRf05R2v-08RNdRgTftCt0rZePvK44T3p0jYt20yZO9Z6wjpcMylGqPXOngJ3Uomyj4AVF3VBHch9YL_Yetf4ihNzx4JsQayD8QYkHVSbS2lJFsP_ESuDfX9w60UrBwEYvGZLW8dtgOrudMLWj1wbUCHA',_binary '\0',1),(403,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNDI0NTIsImlhdCI6MTczMjQ1MDQ1Miwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.eZIg8FHVBwC0N1G0UzWK1PUvTPKlRBHYs7TFuCNSJWDhNYgF8r2OPr13sOoYvHBAw1fohFzbrp8Xg7OObpszhPM_0HPgpmYhG-55lLq9YsrCnoN1_DWEY4W8MlFXPNftqxgMz_lYSahXH3absZJkxIJbzY-60LghJOiANbNEHPGH8p4DTrFS2TNN_SxYLMrjhnE7dCaWlO7PMre36xBzUjFprEOeUFEBi5iFxZJsbfEHzXNI1XsK8fzKwN_-Pz8LZoaT02fb9Mx4RT6ole-VZ0TYPTEm9xBgJK9HFzpNTNblQETfau6IH-PbrlHIakROaJE1tD_QholGZJPGU_KITw',_binary '\0',1),(404,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNDQyNTIsImlhdCI6MTczMjQ1MjI1Miwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.u8X-vwHsGwNLSfJDcqowyal0WCEjtMNQCKvafe_7ttF43upx54dGYK4QuoSlzaPQe4UD_mvL3Y3uhudVEgPiQCaG9ikUDsv2V2sOZ8Au8hZK_TzGMyfhigNd5JtGNpSK8hrEN_vWk3TspWkwCD3NNPWeW5oWdiy5UMZ_CIMPZXftBRXJ_0UbaYTIZGt9tU39VcZF4SoxTI9g1cpQ6GXuo8OLh3Y0C456Zq2T35QEQ15BiAVPjBJcEfVaxusqFUlN3tmzx6LV38FsOnBqU4B_oLJVUw5nFG63QAHIUN_KPnAuBM_9-n-kK64LiPdxv_cSr05gDSAjid3A5N_wxjgFHw',_binary '\0',1),(405,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNDU2NzIsImlhdCI6MTczMjQ1MzY3Miwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.mxipoGDJoHlNGF1t64GskDPOazDacSPSE4e7-JT5gtQONCa267n5Uo8voqe-V94HT2JBmmPSZ3oaXGc9Hvdd9Ph2P_bTYkWGIYsA_n1CjRL1UUOxKFI5Uclxpzz-3hiXWVzqwSk3qJoSGYNgCEO-VNFsWKj-gzaUsrxQdwlmXLO1SrjjixS6yiYNrG3G8cFGqmR9fm-EVfhXpI55awEp4aPUVlRnSGjzlz_vm7zl37CdqkMtI1m96tMq8qv083ac4KC5iWW-rHfOGFobW3bb3NhiMZWFyxVa9qENJPlFI739lyyPnXRcv0QSF12Ec7XKftK_EJxH2JbT5lbpPzNf8w',_binary '\0',1),(406,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNDYxMzIsImlhdCI6MTczMjQ1NDEzMiwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.tRPIvmp05QzA_far-Ipdue11tzrr3eFLmOn_qdbwgsYmkk3RsNxBUstq-njV4QETgclPDkktEYJw7hos0D2FWZqPtmuqYzg6bR0ijXx398Cc2nlYHvHGxPTrvRV50x42pGpOndNftDZN0oKHBA-ly52Z4oljfOQ0xNICQEYMBxUWF-NGHV_miqCbtWXIAgEt_PLHYn-ltUG4shWKetr5gvuROM4g8FmtvKNQWF0HCkfZTOJN5PTrlpOd9MY_H6WYIb0NIfwwtyDax2Of4maJ6in9k_BQlNqmQXUz6TF-Lyla38kXapnWCAzGda1WHxvjdAFBvSmMtqG98mMD_Zlp0Q',_binary '\0',1),(407,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNDY3OTcsImlhdCI6MTczMjQ1NDc5Nywic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.kpT67MlEk_5o5wRvdAoZM0FBgEJyDpKs4w1huoWiEFjrbRxz5GhzlqmHFZ-eRKiStXsN-1UjL65O2rcCvLkIxBZy5w9vAGNsiTxbVKpUuhzDFvUBnrmPCxQRVkfBXCTmM0I4UG2GDNYi4CqyYa5GDG885vT-1FqnNoP-a_KOxvg74q8fqnehMen6NeU8ry66Hddn2oepJ818kmvXgXu6DfoDeVTeeu0nDoAgEmsd74PbSAmmfqcBBkbNMmsoId6-t9-0tYWvm5uTQzty_bcyPMmps0SHiDHgxmGhUWhG49pOCnPbk39mepr8E1UiHRsVhNekaYubtrYQqBUH3i9LrQ',_binary '\0',1),(452,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNTI4MjQsImlhdCI6MTczMjQ2MDgyNCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.RcEAVXEMPIbY7RLafDEVFO6E_rs-E6m58Bk_N1HhoWUBsK8IaM8A1zDdUN_dQsmvviCmHTokHF3HhxZ8zQv4P2uDh88PDtrhmPJU-b4hKk9qcTYRQwxoEwZ9JhhOReHRR3F7JO0266j9dOQ_5I2rSMYLY6_PpkAxuB49z9up0UGZMtyjs6AmJfQpLeRndFLO3G_I5NLVfqCdGq3G1qRa_L3YpGuVWQ3h0_R73yqhVziL5WtSTbu2VUT8_0OxdKDeTLB6VcPMJWywXJhRHyyKqsfhq8kj1PvRg_mXZDJqh5PjD54OrWTO-hbz8nbAiKiwxKMbOMuxqKFOxnoLvbdHug',_binary '\0',1),(502,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNTM4MzEsImlhdCI6MTczMjQ2MTgzMSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.tQIpk2JIhZTjGCDlO2rfrL379WsUBTroJnqYkhRyCv4sQET1WpOavKsPIENIBYakDkQnwGiyiRpeQLcVGlMra_KawwWninilS_nl8P3BFcAwfli-WZTA5bwwRh7rF9-12ovhZOG3ruNyO9FMdzqGhYha6IRSSuY_MphC4kcWlEnBmXpU-EA-jgI7ET2RA-vYNl0kQtsAV7EycWhsjA3DU4I5_EJ-YDJlTDfYZwl2Nx5u0wqf0UyAhwP3GdZB7dYmp481fwYLewXFbOj92ry_q9xOmQWOaSf-zZJgDpzuzS--25HQHcY_P__FStF7-iZpiyUftaAzId3Yjm-3yNpU8A',_binary '\0',1),(552,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNTQ2MjUsImlhdCI6MTczMjQ2MjYyNSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.zW97IOQECCYuyF52CDo6yZ8rs3c_CfMivTJAGm8vB9BX2WuHf0pHn5CKuKPeUhHkM-J3hu3rXhvGen_oK5VxES3P5s2qVJbfEk0Jh4WZSBN0zq4IcqifXCZ_nsNjETgJ2nrl60jrl4VSppy2xdWUneX3CFU7baOrglYutaVQVN5v2YHt6A7J0i66840eSGKm_-WJr3lZ3YNq5RyHofp-JaAPGD3i9G_3eJPino2135Q4-GxA1rq2e6T1fiTQYp9NpVDliX9oWitTj5QwO3CgkPCizXD5NSW7chX9-vzx3_facEewhgrxpJ9DuVxIoCsZQdzh13frFbU90ghp6FIjsw',_binary '\0',1),(553,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNTQ4MDIsImlhdCI6MTczMjQ2MjgwMiwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.RsR0acnW8LgnXDi2b4jZPIk3PfPaOGj_GbgsyDx8PTrThUG9sp-7WQ4Cuj2o6ASBsduyXV8tbT1FXB5BAHCT75UJiwf3VBJM10-ZFT4_5jXSC0xU7mt2i9WkIV4KV5JwVnzgCb-Ah3jsU4obPdAV4uDzMPzYK7MA-PEDovkeuDC1axGlqXhrrinSv5rx3fPoZnz-ESJiRIc-CQ9cqR-gJ_N7PuzC3u94onV22Om89z7ZzEe7q4cA6_zsUSwj2o9Ph3xA0tdKLccyG23HBwyvkPx2nXkSBuqpDLN1L9qKkEaVgoYZgXv9bJiCd67L4lbzQcm5pq5DSozRkxYJkVfXFg',_binary '\0',1),(602,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNTgwNzMsImlhdCI6MTczMjQ2NjA3Mywic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.DHJSaXQT1BRp0FZPkPW9AziRUy2ShVMsQjDEDvBv4cwTz93c3vwY2gC_LiN6bQ_6lC3pYMyFjp8B8tLSgcQbIjdiBLG0Je6PiqelpGfBdJY2sGh8kRtpfolzRd591MAzd7GYucB9FRN4Uhabm0PivQ7_FCvt1GPWS_b30iNsDYAxVSgTYhRokTVP-6NKAFt7mSFITCia6cvwWh1w20md_ydNPHSWD8LP56fTBrC3qGRsiH59APie85x1hNmZAUIHOHbO0PhrOD9vn3ja47D3Tpcz1F71dDBz6SWQdCMTsYFU7uI6ni0n9aOMxp1hfL9Tg74NpjIyAhFRy3rluh874Q',_binary '\0',1),(603,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNTgxOTMsImlhdCI6MTczMjQ2NjE5Mywic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.vxRFWG-rz0rZYnORIpLd9Bq_1t9r4qk_zZNy2KsI06n6Z6_9umRuv5jWRcJbhJfh11u05D7r1BkuTaF2yNCHfFSW5TEPLalxdY81CDDqYJFPJjiiRhOBQGgsvyNYx6ZIIXqoZPHVDjuu_HBvbMe9rQZeNbuMxXdqfeHn_lvXFTVykhD33ThvQGmg95bxyto8LCU7Hh8IOrdnr_Uz-9gyc9gK4DKqLznVpQudodkR1hEMg1MQ9JVLrxFdSWtgnKx3nEQnM_QbApOC7GrHl5skXtvzjV_61KwZCXLvdweLTSbAleroiU-gOo7-U-8s5tU-SeGnsKSRUtq1ZCPPGN8K0g',_binary '\0',1),(652,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNTkwNTMsImlhdCI6MTczMjQ2NzA1Mywic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.gvf2mCX1YQ6lous-PdFp5-oKKZsSFFiu_noMnvmzA2Dp3WyvHZqQWFkzo3PWBq2YNSqcFKkiUvO9FJ2e6EbodTdU-TYaiyxFt1rOcuryVntFKlngwrhw4XDjJFiPkvflsIoKhL9dmBBCulQbbBCeW1IRDkKjPdi2Rq7SE67wYYiqImvsrUd8z0NZ-Y2L85GcbUk7jKQFgLMyAmRbEPB8hXHgpySAM9aDAqywyqiJwll9LNPnribaaAyZoFA8-uqvknYwIiPjcL_LOZhp6ox9Y7xSL_vGWmU60g1hPAFMKqeZxWvGmbOEfplig9g-4hGLVCd_a7016_5iggaq0U6rOA',_binary '\0',1),(702,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNjAwODcsImlhdCI6MTczMjQ2ODA4Nywic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.t0q9d0pzV5KBC4UKsvEjpewLGa4D1nxx8mRrkt5bIk088nUaP6-2_T5vLk6Av25wbQVgKu28SjQd_Ncmo54doFSQldOGz-xoylen2DxWgPBhOWwcCJxkYZAdxdtwFJ21cbM7PcBg3YHnN_oMPZj0__6cNK6c4FA37jnQrQLtR5Cw6MvH8B0ryfdTt7SIQyXLhaQaPEUWhwzPs_PC6IbUxkPHPEjtxfjBU-KRnlE17Ji7kieNXSNHylB5ayMKq36bmlcribjOg0ZsvotdYjThzuM-E7uj-oNKnNAwa0HmlC_wVvhzKjfWlCrMU1GfYftiyN4fQQAqEyuiLfaqb6YRGg',_binary '\0',1),(703,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNjA3ODUsImlhdCI6MTczMjQ2ODc4NSwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.UUZzeHNMSV6v7q8VfuBsmel39aYF5hTLTu9F5mJ60L0EIXGTSh5j-d6YwgWL_muOiwhau1KpMFCmtXMXd4cpnS4NAIdTI3pZe_vmYGPrflZpBDmwPuMhTBem38ceyadS3BR1TbLIz3Emu6td8AGFuWyDXYckLF2NmsPovmo9bg0rcV5IFc-7eKkxF6eHMjYsOWkAmg487FXPSuzlfhl5Z5KgXEjwc89BhVxNUosMJW5HiWIfhy46JR_s6bNvBtCsB19c1oDbW0xMlF0931Ejs41piolrctiClPOSsoj2aiR-v1oPzMvVzuAUL6e-wGdC0jmNz6IvaC3aa_hvJysGAA',_binary '\0',1),(752,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNjIyMzAsImlhdCI6MTczMjQ3MDIzMCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.wM-cxJ7haz4wF3TYEn_MXRX1-MbmURwssAXOGYr4xqaaTOT8E2XZxdynlnVibXvU9_T66WwKvqZCAOvjikbSDVZh1v4KCFPC1wuV5QaLkahlz8awxQi_dIgjgtWVEgD5juANnsnibLO6WHoTEjehhTNCBYxpUAeaxn4rc36heNO1XIPID1b-Pe67kSi_hRLeOseVV0n_-CB4JBPLGauDbPyiZDLqa2l3Ry8MEcYRYwagmx4UCA-FoSkWvEYR4xIda-FNZUk_teNAKRK8e1q-eDF4Y_gyH_2pNFIHbbNk57Gx6CGDheqIOeebtXkX3ldrDzbr2Rpo4PAFMJ_2MWaVug',_binary '\0',1),(753,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNjM2OTQsImlhdCI6MTczMjQ3MTY5NCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.W4VnJUK7suFq8Ulz5fLlfTMXipL7hngWrkD6JXE_YRhl3NYSa4bgNvY8-ybjqkgK8fkw_2ZqQ6muO_V3JDGuNpiG9WfJyiTN_f1nYakzhu7SdhmEWC7qctBnhOKfeLp6YJ2xMB5Sz3taHPTYrDDuh7dT8g2LYnxqQxxkxfe1qwD2cuYBbbocKRIo1JZ3Ec7rxVMmPRVHvKzowZQGtIZeShV4xotLaYpu6jzsGcgB-dWL5hRL93EA_LEVoz_8gdfe1zfUzCo8tq_HfsmElOuvMOPZFYKf0COWKau4LC3gbFxI6ESvA47zsr1NFEoQDtOMIRfiTJHdCrnsuHij7cSdAw',_binary '\0',1),(754,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ1ZGVlc2hhcHJhYmhhc2hhbmExMjNAZ21haWwuY29tIiwiZXhwIjoxNzM1MDY1MTg2LCJpYXQiOjE3MzI0NzMxODYsInNjb3BlIjoiUkVGUkVTSF9UT0tFTiJ9.uLgfyDrBRWU1jNm4nzyp-0aOeDMyaeaFfSnYwjdtc4SCFXN5DdhlT1KdXAg9DGDVDXs7TTk7Tmtak_CE4WmU68MuGqvW_4Fz9Ngg_6JsRthBldHknBlhb_Rsh9jokE-4tbxTXcW4p5RnPFKoBOCsO7ixziHPrF0nuL7us_4dUaNWYRnelyrEwqAIGHN7jhzgeR33gG5yHc3tfG02-fxI-upUs_vnK-1q1x-i-4iFXv-hGVdZXx4ADKP7jqWibTDT517EOY4kdp42ZYtfnb9S_GQdfSGB-J5L0a7KAbBkwKovpSu9KkYe9Qk4qanWuUaqgz3IQLA9Fw4MJnfM4G4Fgg',_binary '\0',2),(755,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNjUyMTQsImlhdCI6MTczMjQ3MzIxNCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.IFtGHvfk1sUpM68jgHFkVrx2WQL1NQ-1_RhLY7MMBTQvBVJSHflsBbvd1y_2Jf2mxlnhe7cSJ_WJE1NwMZSNti6Xuh31Q4-_LJu7q8S61VewAcBe4_CrEDvf4XWlYmKOp9eh_VOBVsIvVjx10Laz7j1x2I9yVC0vysD2ADAOO5f3PQNT-keScNUuaC5curtzvmhyJbN0Gg7TbgCB2h6S_1dMFoFQCNCFk8CnfV6fEEva4mNE1c5c-F1EivNyhjwhqBf6xay432SB3k5ZDJLIZiSvzzpHNSKzA39xCK2kFry5QwviR2sOHOQy7pnSi9S_MlKgR1yvlLf5BIGqOex5ww',_binary '\0',1),(756,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ1c2FkcmZmMTIzQGdtYWlsLmNvbSIsImV4cCI6MTczNTA2NTMzNCwiaWF0IjoxNzMyNDczMzM0LCJzY29wZSI6IlJFRlJFU0hfVE9LRU4ifQ.GRU-10NTqYHv7zCCrZ7ZKIGDPscsqoTdNhC0XdAtwxVZYqsom1qx8hR9gw-X0yhb6TXjM9TaD8UQ1u50HYeClwfT0P-Av_dLgScFRMsZ8bT4Zm9upIQa_UB05qiUKXulr-Z6sGj5qfSjhnKGNId1QMPVEBvoSnGrvhf9gghTCz7QKAsobTKtZUvkRR2HWBGw-G4cEaTQWLoFixcxmiikxVAss8Husx0MOtP1pb9SFXwQSzgXv2U_vJBTskzglM4nLwhcI5XVzstm28836xBeSEtKTa6G3VuVYsjlGIfGbwWDHoeg_oSsxzOfFefR1sY2PPW2GU4yGmfd0TZLg_QVyA',_binary '\0',3),(757,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ1c2FkcmZmMUBnbWFpbC5jb20iLCJleHAiOjE3MzUwNjU1NTAsImlhdCI6MTczMjQ3MzU1MCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.xU7eGeUPbDwsnjtdJo2bOx1yOXqJxriE_0UQ45K-w4h81wGJZ0FJCwlzYpYTwm0sucNtZflzzXiKNvxhv3J-uKU6eOmB8RRRuJ0n8ubAx_0Z0Nc1j0dczpHRkqnEiHwTzlkSB-noWJh9slIDBOcdRV2FYEHK-iITVQ4-5OCptbzMM_jidxPR7klEXFpmZ1qJ_7JOEuQg4CLEOEW6v9c9WRx1TkszoDt61CwvKGLDOxWGEF-3RpaxLU5cE5J_WK_mI8oXSu_HdKzkmhnW07OFaKcmbHWgxZAfX4X4KuLtPgszEE-V_T_IQkeJ5BWuZAWKSrlx5ZbLvw2XBLeha0voIw',_binary '\0',4),(758,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUwNjU1NjAsImlhdCI6MTczMjQ3MzU2MCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.GGm5DSA0q92VDr2wpyHbqoJT-w3oMijlWe23OzVMw-Cp8oGBBr2986xqnS1S3UCn4Rq-b9P6lzG3_8Qm7Yv1znWDcFE2Cd5M1HfKeyTd1lo-7Z_LCtvTswevFVsvPaoNaDdpGAA4aY_TB6iQOLjpwcz7fkM1G3KQ78PfVEGzTmYjs3CclnKSNmdMF93lHPJ7mLze_u8TgbLNEFvIPgObWF3Tx9qx6BGxia-IcL8gr_RC386jQkHPnMBOoIVrZgMPIxcjL1CN2E7TCOadVpL3VlCjqiJisFnFTfCZe_zrN4Ry16-RFdy13Q6XSTP_4m2TpvI6rPZERNbQVYOFujl-Tw',_binary '\0',1),(759,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJQYXNhbiIsImV4cCI6MTczNTA2NTYxNywiaWF0IjoxNzMyNDczNjE3LCJzY29wZSI6IlJFRlJFU0hfVE9LRU4ifQ.sD66DuGaw44Qb5EQ88T-qRwVzwr3yrH58FxPvk5oR0pdTu7iK90L1O6J_5dSFtT2EV5NxnOzC6WAhGhHnHQsWLtbd4mbrrJomTE0VsEZx_vsZyzy-n_Dlh7gUFZhBV3h0XBA25IvnRSAjjhOGBvXzCQPSrNKEX_KKNl-PBFVF1SlyCJF79GlzZjDo9dfrCFdW3O9JmNwS9XvA9R_dWCZ4-vhk6yBSsXlscSt5DymbHdjkfrV3kyCBnQhoUkjoaOpJ1xmiDos-QWXEg9r08Uv6_MYmX8yH01tmeoS0XhkA4ft8EBoxTLmI0dp8BehTOKp07DMTF892YN2E3zqjfSvXA',_binary '\0',2),(802,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUzMTE0MzIsImlhdCI6MTczMjcxOTQzMiwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.BrfRVJQuqgnbQymt2cmULyQlvXrAQ84kApFS7-KL8HSAZartoU16ayx28rucgIuNON02BaBGQFIwPXMm8WvbxkKoUKkUZWpJunJRTKX32s__nBAs6Q3YjcsKNKZhSEoHBZCqb_N6n09ocmqgNtcjx1CBn2-PEd7JYhWKkJ5Q0O5cAEe26NFuZYgbXcnMlXhMj8AXFgtgOJC_6oJAt6ryq5X6uKmY9uHvRw1nPYTX14AIQXPaNazWWC2nz87CEKDUuxKmdfWOaD7KykvYSsXWn-0cygMfuD5706fLK60uOj3aOUhWnvBCcdew2h7G0eoDfTuqpnzhfoAiBXZYs8fjAA',_binary '\0',1),(803,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUzMTIwNzIsImlhdCI6MTczMjcyMDA3Miwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.XiXhhFIqSwsw07L2tq2g7JQ4TDrkkCEJfHoUqMg_vFwBH6PFxIp0T7x9GEBKxo6q0k-JXbjP006nbFvrOttNE4ZNqfhrZv0gBdztMQvnccIdId6-aqvYnM27ov-Hkc7UcSIXh3XIgVZ8P2WIhrfDUcVkmAZP05zPxhTEdQ2b4Ncj8IXOmUj2IuR2jYA6qcz6gAyQvjPM-aY_TBTn9qW3pugkxZZ4tn0F0LiOPpMgj92UOcFgGXrpqo21Qk4J5xJOZZaJC9Jb7i2y3HDLzRWNHnY7h9P6BL1wrzklvUBWh3k3WDyH96bU0lLPQXvAYNiGCEHLOfeXKYhWZapHO-qHCQ',_binary '\0',1),(804,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJzYWR1bkBnbWFpbC5jb20iLCJleHAiOjE3MzUzMTIyODMsImlhdCI6MTczMjcyMDI4Mywic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.OhmnJmakOu156TUM2k31ppmUUgzBxi6cHIXR-TppbH11sThgNmZlUT6vPDKySotI-XlctVPyjZQ5g7uB9noQxJGJom5p5vA9saCUsnL4-ewZ1KM_fD6YRow9IlOXZKYlIClh3tk1VzEbRKQ-Aoxg1JAv5q6umtLCMgNUmkhW09AibHaDKuYxdsPDxxsOifbxAB3pRYO5idv_dro394gCW2DRuNjWjowf0ICoV0SpAeP6EPbbqiWXiU-57QFCpwNCwzZk5ntM7gRcW2U2suTIZuz7Fxcy1vmPPyftp_tNLAGPnjjupMnxvJpZMPWYOTurQ40DTRwvvq8ZDr7I1p4DyQ',_binary '\0',5),(805,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJzYWR1biIsImV4cCI6MTczNTMxMjMwNCwiaWF0IjoxNzMyNzIwMzA0LCJzY29wZSI6IlJFRlJFU0hfVE9LRU4ifQ.RHzVnubddznFZz2Q9YklJm0eRTT1I7-cpDENGOYJkD3ZkpDC4ikC_GNWYr9JOZuEZJUxAp5nLTuDDxpI5slxxdLx2Phi4K6ZXGqSgYpCmukpUmdqN5Z95b-YKfP9jjRylRpvimX51AvNItoVqpF2m75MTwOFDKm2uVOqhjuShnrpQVRmFqyoh3LxBO-04-HRw1LJHbrzAjuqIf4rKknyf_i4g0yGUhLEF-J0x-kLRThHNFIevHAU15pO6fu3wy09bhrLy2pgre7mfYk4CQWgP3MEVeKlhUoP6KrivdutJMVEWnTDLriCIaCyJOVdpr9gdEb4JxC7p1saBcgGeqsxkQ',_binary '\0',5),(806,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUzMTIzODQsImlhdCI6MTczMjcyMDM4NCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.TaFl3XqB5l0i6zTawn5NEjsI9J8JnJRF7AgYQCS2NAralBV4qmwEZR7ZlF73fZlFKuiBPeEcxKTRxIybHvxEP9Gn5UoYmvZkOtMmG7IDMvx_a3trF0XanMTV4_Jsrt0mYcsRcYeJwpypmOCwquUK0N6LvqkgnMt-udOgmJ18nWYGVk8NWTJd4w6ZPrhU1-ZUjkZg-0V0r1j29SkSxDi3PpyONdpjpF9Axzi6jRMP3yyEluur9lvH0btXpERm9wyaN1llqRfCAuvLrSdeIxSI8rzKhzK7zpfjb9934CEXlqKbvgTGPVRZWehv8BwRYM73B9d88fSFn2pR64usSPThdA',_binary '\0',1),(807,'eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdHF1aWwiLCJzdWIiOiJ2ZW5kZXIiLCJleHAiOjE3MzUzMTIzOTgsImlhdCI6MTczMjcyMDM5OCwic2NvcGUiOiJSRUZSRVNIX1RPS0VOIn0.pOmwidXTZ5fyHSGVTxKAd2isVHiDmz6FkU6wd5SvqciRDA-4S3VFBky3_EkgJW1nvTJmY_iU-w0vujogfDLByAZNmYQudwKzRlIGyOufEtIQK7y6Dzkku4EgJFzA6hDa8Kfa5tCu3QIpcH9c7kPMiYOkcyE9YubFWwgQGDEVK7TyhXoaEzjU0bQntEF0ltEbsPCsA8owsSb9QSvcam_gBXZqPNfmv0MVlV2O7GdmKTWLOR_ycB5Z8T1M7yF9IzWPfC2YosSPkDJA-Ga3LbK6qSYBmd1Yj3qL90SI8XpWRM6I-hUrZV4r1uklbyaGw3JUSr700nvVPLtXd_5q1Z6Tlw',_binary '\0',1);
+/*!40000 ALTER TABLE `refresh_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `refresh_tokens_seq`
+--
+
+DROP TABLE IF EXISTS `refresh_tokens_seq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `refresh_tokens_seq` (
+  `next_val` bigint DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `refresh_tokens_seq`
+--
+
+LOCK TABLES `refresh_tokens_seq` WRITE;
+/*!40000 ALTER TABLE `refresh_tokens_seq` DISABLE KEYS */;
+INSERT INTO `refresh_tokens_seq` VALUES (901);
+/*!40000 ALTER TABLE `refresh_tokens_seq` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tickets`
+--
+
+DROP TABLE IF EXISTS `tickets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tickets` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `quantity` int NOT NULL,
+  `total_price` double NOT NULL,
+  `customer_id` bigint NOT NULL,
+  `event_id` bigint NOT NULL,
+  `contact_no` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `event_date` varchar(255) NOT NULL,
+  `event_time` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `event_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKcl6she6ic7de97o1ryli2g95i` (`customer_id`),
+  KEY `FK3utafe14rupaypjocldjaj4ol` (`event_id`),
+  CONSTRAINT `FK3utafe14rupaypjocldjaj4ol` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
+  CONSTRAINT `FKcl6she6ic7de97o1ryli2g95i` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tickets`
+--
+
+LOCK TABLES `tickets` WRITE;
+/*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
+INSERT INTO `tickets` VALUES (6,3,450,1,1,'0776750158','udeeshaprabhashana123@gmail.com','2024-12-15','09:30:00','Pasan','Tech Conference 2024'),(7,2,300,1,1,'0776750158','udeeshaprabhashana123@gmail.com','2024-12-15','09:30:00','Pasan','Tech Conference 2024');
+/*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `mobilenumber` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `roles` varchar(255) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK6dotkott2kjsp8vw4d0m25fb7` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,NULL,'vender@manager.com','888442398',NULL,'$2a$10$d4VVJJFEHt/OkL5aFuuPKe6FKhEObjxvXVkR80eHEMg3fVogoeNUC','ROLE_VENDER','vender'),(2,NULL,'udeeshaprabhashana123@gmail.com','0776750158',NULL,'$2a$10$/IDXOa.pQg23vkWuYuFeyOQvdbdGDJpp8t7N5PUnQyn4vYpI3Ojl6','ROLE_VENDER','Pasan'),(3,NULL,'usadrff123@gmail.com','0776750151',NULL,'$2a$10$fmtTiy1xfxtw/N41JG4qleqZnpGwQMbE9tN6KLsljBNoJbbj7dfty','ROLE_VENDER','sadun sathsara'),(4,NULL,'usadrff1@gmail.com','0776750122',NULL,'$2a$10$dn7Oe6ypKz5X0iWQCpYf1OwTdebKPawmvR1vQtKEvobTW8tp.Z.zW','ROLE_VENDER','sadun sathsara'),(5,NULL,'sadun@gmail.com','0772234256',NULL,'$2a$10$zSbCccFCaSOzM0h.LnXuO.fmqJtyttkOfm1bR8Cvub2KTSU2pOJcG','ROLE_VENDER','sadun');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'eventmanagement'
+--
+
+--
+-- Dumping routines for database 'eventmanagement'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-12-01 23:05:36
