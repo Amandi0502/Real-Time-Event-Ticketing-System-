@@ -31,7 +31,8 @@ Ensure you have the following installed:
 
     Node.js (v16 or later)
     Java JDK (v11 or later)
-    MySQL/PostgreSQL
+    MySQL
+    
 **Clone the Repository:**
 ```bash
 git clone https://github.com/your-username/Real-Time-Event-Ticketing-System.git  
