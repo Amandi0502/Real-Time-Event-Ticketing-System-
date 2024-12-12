@@ -1,6 +1,6 @@
 
 # Overview.
-The University Multiple Event Management System is a web application designed to streamline the management of various events such as workshops, seminars, cultural programs, and academic sessions.The application allows users to create and manage events,register and partcipate in events and monitor event schedules.The objectives are 
+The University Multiple Real Time Event Management System is a web application designed to streamline the management of various events such as workshops, seminars, cultural programs, and academic sessions.The application allows users to create and manage events,register and partcipate in events and monitor event schedules.The objectives are 
 Enhance event management efficiency,provide a user friendly platform for event discovery and participation and demonstarate the integration of modern technologies.
 
 
@@ -34,8 +34,8 @@ Ensure you have the following installed:
     MySQL/PostgreSQL
 **Clone the Repository:**
 ```bash
-git clone https://github.com/your-username/university-event-management.git  
-cd university-event-management  
+git clone https://github.com/your-username/Real-Time-Event-Ticketing-System.git  
+cd Real-Time-Event-Ticketing-System  
 ```
 
 **frontend:**
