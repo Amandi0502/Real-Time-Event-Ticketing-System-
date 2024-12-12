@@ -49,7 +49,7 @@ npm run dev
 Open the backend project in your Intellij Idea and 
 Update the application.properties file with your database credentials:
 ```bash
-spring.datasource.url=jdbc:mysql://localhost:3306/event_management  
+spring.datasource.url=jdbc:mysql://localhost:3306/eventManagement  
 spring.datasource.username=root  
 spring.datasource.password=your_password  
 ```
