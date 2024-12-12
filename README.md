@@ -10,7 +10,6 @@ Enhance event management efficiency,provide a user friendly platform for event d
 - User Management
 - Event Management
 - Registration System
-- Admin Panel
 
 
 ## Tech Stack.
