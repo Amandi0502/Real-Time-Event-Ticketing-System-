@@ -57,7 +57,7 @@ spring.datasource.password=your_password
 Run the Spring Boot application.
 
 **database Setup:**
-Create a database named event_management.
+Create a database named eventManagement.
 Import the provided SQL script to create tables and insert initial data.
 ## Usage
 
